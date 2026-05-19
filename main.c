@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+#include "inventory.h"
+
+void inspect_item(Item *item_ptr){
+    if (item_ptr->category == WEAPON) {
+        printf("Damage Points: %d\n", item_ptr->data.weapon.damage_points);
+    } else if (item_ptr->category == POTION) {
+        printf("Healing Points: %d\n", item_ptr->data.potion.healing_points);
+    }
+}
+
+int main(){
+    Item inventory[2];
+    inventory[0].category = WEAPON;
+    inventory[0].data.weapon.damage_points = 30;
+
+    inventory[1].category = POTION;
+    inventory[1].data.potion.healing_points = 50;
+
+    for (i8 i = 0; i < 2; i++){
+        inspect_item(&inventory[i]);
+    }
+}
+
+
