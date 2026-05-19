@@ -2,6 +2,8 @@
 
 #include "inventory.h"
 
+// check the category of the item and print its properties accordingly
+
 void inspect_item(Item *item_ptr){
     if (item_ptr->category == WEAPON) {
         printf("Damage Points: %d\n", item_ptr->data.weapon.damage_points);
