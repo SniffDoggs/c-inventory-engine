@@ -16,13 +16,15 @@ typedef uint64_t u64;
 typedef float f32;
 typedef double d64;
 
-// defines the categories of items in the game
+// track categories of items in the game
 
 typedef enum {
     WEAPON,
     POTION,
     KEY,
 } ItemCategory;
+
+// track properties of item types
 
 typedef struct {
     u16 damage_points; // raw damage dealt per hit
@@ -32,14 +34,12 @@ typedef struct {
     u16 healing_points; // health regenerated instantly
 } PotionStats;
 
-// defines the properties of an item-type
-
 typedef union {
     WeaponStats weapon;
     PotionStats potion;
 } ItemData;
 
-// defines an item
+// track item data
 
 typedef struct {
     char name[32];
