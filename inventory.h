@@ -47,4 +47,6 @@ typedef struct {
     ItemData data;
 } Item;
 
+void inspect_item(Item *item_ptr);
+
 #endif
