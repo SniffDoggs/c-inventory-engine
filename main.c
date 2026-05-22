@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "inventory.h"
 
 // inspect category of item and print its properties accordingly
+
 void inspect_item(Item *item_ptr){
     if (item_ptr->category == WEAPON) {
         printf("Damage Points: %d\n", item_ptr->data.weapon.damage_points);
@@ -12,7 +14,13 @@ void inspect_item(Item *item_ptr){
 }
 
 int main(){
-    Item inventory[2];
+    Item *inventory = NULL;
+    i16 inventory_size = 0;
+
+    printf("Enter the number of slots: ");
+    scanf("%hd", &inventory_size);
+
+    inventory = (Item *)malloc(inventory_size * sizeof(Item));
     inventory[0].category = WEAPON;
     inventory[0].data.weapon.damage_points = 30;
 
@@ -22,6 +30,8 @@ int main(){
     for (i8 i = 0; i < 2; i++){
         inspect_item(&inventory[i]);
     }
+
+    free(inventory);
 }
 
 
