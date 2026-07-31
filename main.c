@@ -24,6 +24,7 @@ int main(){
 
     if (inventory == NULL){
         fprintf(stderr, "Error: Memory allocation failed.\n");
+        return 1;
     }
 
     inventory[0].category = WEAPON;
