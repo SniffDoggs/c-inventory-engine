@@ -23,7 +23,7 @@ int main(){
     inventory = malloc(inventory_size * sizeof *inventory);
 
     if (inventory == NULL){
-        fprintf(stderr, "Error: Memory acllocation failed.\n");
+        fprintf(stderr, "Error: Memory allocation failed.\n");
     }
 
     inventory[0].category = WEAPON;
