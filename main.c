@@ -20,7 +20,7 @@ int main(){
     printf("Enter the number of slots: ");
     scanf("%hd", &inventory_size);
 
-    inventory = (Item *)malloc(inventory_size * sizeof(Item));
+    inventory = malloc(inventory_size * sizeof *inventory);
     inventory[0].category = WEAPON;
     inventory[0].data.weapon.damage_points = 30;
 
