@@ -15,10 +15,10 @@ void inspect_item(Item *item_ptr){
 
 int main(){
     Item *inventory = NULL;
-    i16 inventory_size = 0;
+    size_t inventory_size = 0;
 
     printf("Enter the number of slots: ");
-    scanf("%hd", &inventory_size);
+    scanf("%ld", &inventory_size);
 
     inventory = malloc(inventory_size * sizeof *inventory);
 
