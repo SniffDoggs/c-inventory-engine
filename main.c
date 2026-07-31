@@ -21,6 +21,11 @@ int main(){
     scanf("%hd", &inventory_size);
 
     inventory = malloc(inventory_size * sizeof *inventory);
+
+    if (inventory == NULL){
+        fprintf(stderr, "Error: Memory acllocation failed.\n");
+    }
+
     inventory[0].category = WEAPON;
     inventory[0].data.weapon.damage_points = 30;
 
