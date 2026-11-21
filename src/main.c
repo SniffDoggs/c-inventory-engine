@@ -3,20 +3,19 @@
 
 #include "inventory.h"
 
-// inspect category of item and print its properties accordingly
-
-void inspect_item(Item *item_ptr)
+/* inspect category of item and print its properties accordingly */
+void inspect_item(item *item_ptr)
 {
-	if (item_ptr->category == WEAPON) {
+	if (item_ptr->category == ITEM_WEAPON) {
 		printf("Damage Points: %d\n", item_ptr->data.weapon.damage_points);
-	} else if (item_ptr->category == POTION) {
+	} else if (item_ptr->category == ITEM_POTION) {
 		printf("Healing Points: %d\n", item_ptr->data.potion.healing_points);
 	}
 }
 
 int main()
 {
-	Item *inventory = NULL;
+	item *inventory = NULL;
 	size_t inventory_size = 0;
 
 	printf("Enter the number of slots: ");
@@ -77,14 +76,14 @@ int main()
 
 				switch (item_choice) {
 				case 1:
-					inventory[slot - 1].category = WEAPON;
+					inventory[slot - 1].category = ITEM_WEAPON;
 
 					printf("How much damage will your weapon deal(1-100 hp)? ");
 					scanf("%d", &inventory[slot - 1].data.weapon.damage_points);
 
 					break;
 				case 2:
-					inventory[slot - 1].category = POTION;
+					inventory[slot - 1].category = ITEM_POTION;
 
 					printf("How much health will your potion regenerate(1-100 HP)? ");
 					scanf("%d", &inventory[slot - 1].data.potion.healing_points);
@@ -97,10 +96,10 @@ int main()
 
 	} while (1); 
 
-	inventory[0].category = WEAPON;
+	inventory[0].category = ITEM_WEAPON;
 	inventory[0].data.weapon.damage_points = 30;
 
-	inventory[1].category = POTION;
+	inventory[1].category = ITEM_POTION;
 	inventory[1].data.potion.healing_points = 50;
 
 	for (size_t i = 0; i < 2; i++) {
