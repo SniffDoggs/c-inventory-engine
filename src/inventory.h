@@ -41,6 +41,11 @@ typedef struct {
     item_data data;
 } item;
 
-void inspect_item(item *item_ptr);
+/* Inspects the item and prints its properties accordingly */
+void print_item_by_type(item *item_ptr, size_t item_index);
+
+/* Adds a new item to the given slot_index; returns inventory unchanged if out of bounds */
+item *add_item(item *inventory, size_t inventory_size, size_t slot_index, item new_item, size_t *empty_slots);
+item *prompt_add_item(item *inventory, size_t inventory_size, size_t *empty_slots);
 
 #endif

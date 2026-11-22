@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "inventory.h"
 
 int main()
@@ -7,6 +8,7 @@ int main()
 	item *inventory = NULL;
 	size_t inventory_size = 0;
 
+	printf("*********************************************************************************\n");
 	printf("Enter the number of slots: ");
 	scanf("%ld", &inventory_size);
 
@@ -17,85 +19,38 @@ int main()
 	return 1;
 	}
 
-	size_t empty_slots = 0;
+	size_t empty_slots = inventory_size;
 	
+	bool input_loop_is_running = true;
 	do {
-		for (size_t i = 0; i < inventory_size; ++i) {
-			if (inventory[i] != 0) {
-				++empty_slots;
-			}
-		}
-
 		i32 choice;
-		printf("Choose an option: \n"
-		"Press 1 to add an item,\n"
-		"Press 2 to delete an item,\n"
-		"Press 3 to see items.\n"
-		"Press 4 to exit\n"
-		"\n"
-		"Enter your choice: ");
+		printf("*********************************************************************************\n"
+		       "Choose an option: \n"
+		       "Press 1 to add an item,\n"
+		       "Press 2 to delete an item,\n"
+		       "Press 3 to see items.\n"
+		       "Press 4 to exit\n"
+		       "Enter your choice: ");
 		scanf("%d", &choice);
-		printf("\n");
 		
 		switch (choice) {
-		case 1: { 
-			i32 slot;
-
-			do {
-				printf("There are %zu available slots,\n"
-				"Which slot do you want to add your item in? ", empty_slots);
-				scanf("%d", &slot);
-
-				if (!(slot >= 1 && slot <= inventory_size)) {
-					printf("Invalid input: please enter a slot number that is less than your inventory size");
-				}
-				
-			} while (!(slot >= 1 && slot <= inventory_size));
-
-			i32 item_choice;
-
-			do {
-
-				printf("What do you want your item to be?\n"
-				       "Press 1 for weapon\n"
-				       "Press 2 for potion\n"
-				       "\n"
-				       "Enter your choice: ");
-				scanf("%d", &item_choice);
-
-				switch (item_choice) {
-				case 1:
-					inventory[slot - 1].category = ITEM_WEAPON;
-
-					printf("How much damage will your weapon deal(1-100 hp)? ");
-					scanf("%d", &inventory[slot - 1].data.weapon.damage_points);
-
-					break;
-				case 2:
-					inventory[slot - 1].category = ITEM_POTION;
-
-					printf("How much health will your potion regenerate(1-100 HP)? ");
-					scanf("%d", &inventory[slot - 1].data.potion.healing_points);
-
-					break;
-				} while (!(item_choice >= 1 && item_choice <= 100);
-
+		case 1:  
+			inventory = prompt_add_item(inventory, inventory_size, &empty_slots);
+			break;
+		case 3:
+			for (size_t i = 0; i < inventory_size ; ++i) {
+				print_item_by_type(&inventory[i], i + 1);
 			}
+			break;
+		case 4:
+			printf("*********************************************************************************\n"
+				   "Exiting...\n"
+				   "Thanks for playing!\n"
+				   "*********************************************************************************\n");	
+			input_loop_is_running = false;
 		}
 
-	} while (1); 
-
-	inventory[0].category = ITEM_WEAPON;
-	inventory[0].data.weapon.damage_points = 30;
-
-	inventory[1].category = ITEM_POTION;
-	inventory[1].data.potion.healing_points = 50;
-
-	for (size_t i = 0; i < 2; i++) {
-		inspect_item(&inventory[i]);
-	}
-
-	printf("%zu\n", inventory_size);
+	} while (input_loop_is_running); 
 
 	free(inventory);
 }
